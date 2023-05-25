@@ -1,12 +1,22 @@
 const express = require("express");
 const app = express();
 
-app.get("/sticker", function (req, res) {
-  const currentDate = new Date();
-  //   res.send(currentDate.toString());
+app.use(express.json());
 
-  const url = msg.body.substring(msg.body.indexOf(" ")).trim();
-  res.json(`${currentDate}\n\n ${url}`);
+app.get("/sticker", async function (req, res) {
+  try {
+    const currentDate = new Date();
+    const url = req.body.url;
+
+    // Aqui você pode adicionar o código adicional que precisa ser executado com async-await
+
+    res.json({
+      currentDate: currentDate,
+      url: url,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 app.listen(3000, function () {
