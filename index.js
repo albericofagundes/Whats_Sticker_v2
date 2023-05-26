@@ -11,10 +11,14 @@ const {
 app.use(express.json());
 
 app.get("/sticker", async function (req, res) {
+  console.log("req", req);
+  console.log("req.body", req.body);
   try {
-    const url = req.body.url;
+    console.log("req", req);
+    console.log("req.body", req.body);
+    // const url = req.body.url;
 
-    const { data } = await axios.get(url, { responseType: "arraybuffer" });
+    const { data } = await axios.get(req, { responseType: "arraybuffer" });
     const buffer = await createSticker(data, {
       pack: "My Pack",
       author: "Alberico Fagundes",
